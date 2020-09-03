@@ -1,32 +1,26 @@
-import React, { useState, useCallback, useEffect } from "react";
-// import { useForm } from "./useForm";
-import Hello from "./Hello";
-// import { Square } from "./Square";
-// // import { useFetch } from "./useFetch";
-// import { useCountRenders } from "./useCountRenders";
+import React, { useState, useRef, useEffect } from "react";
+import ReactDOM from "react-dom";
 
-const App = () => {
-  // useCountRenders();
+function App() {
+  const [count, setCount] = useState(0);
+  const countRef = useRef(0);
 
-  // const [count, setCount] = useState(0);
+  countRef.current = count;
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     console.log(`You clicked ${count} times`);
-  //   }, 3000);
-  // });
+  useEffect(() => {
+    setTimeout(() => {
+      alert("You clicked on: " + countRef.current);
+    }, 3000);
+  }, []);
 
-  // return (
-  //   <div>
-  //     <p>You clicked {count} times</p>
-  //     <button onClick={() => setCount(count + 1)}>Click me</button>
-  //   </div>
-  // );
   return (
     <div>
-      <Hello />
+      <p>You clicked {count} times</p>
+      <button onClick={() => setCount(count + 1)}>Click me</button>
+      {/* <button onClick={handleAlertClick}>Show alert</button> */}
     </div>
   );
-};
+}
 
-export default App;
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
